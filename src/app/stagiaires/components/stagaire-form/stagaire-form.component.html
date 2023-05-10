@@ -1,0 +1,73 @@
+
+<ng-container *ngIf="stagiaireForm">
+
+<form [formGroup]="stagiaireForm" (ngSubmit)="onSubmit()" [ngClass]="{'valid': stagiaireForm.valid}">
+
+    <mat-form-field>
+      <input
+        matInput
+        id="firstName"
+        type="text"
+        formControlName="firstName"
+        [ngClass]="{'valid': true}"
+        placeholder="Firstname"
+      >
+
+      <mat-error *ngIf="c['firstName'].errors && c['firstName'].touched">
+        Le prénom du stagiaire est obligatoire
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Lastname" id="lastName" type="text" formControlName="lastName">
+      <mat-error *ngIf="c['lastName'].errors && c['lastName'].touched">
+        Le nom du stagiaire est obligatoire
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Email" id="email" type="email" formControlName="email">
+      <mat-error *ngIf="c['email'].errors && c['email'].touched">
+        <span *ngIf="c['email'].hasError('required')">
+          L'email du stagiaire est obligatoire
+        </span>
+        <span *ngIf="c['email'].hasError('email')">
+          L'email saisi n'est pas valide
+        </span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Phone number" id="phoneNumber" type="text" formControlName="phoneNumber">
+      <mat-error *ngIf="c['phoneNumber'].errors && c['phoneNumber'].touched">
+        <span *ngIf="c['email'].hasError('pattern')">
+          Le numéro saisi n'est pas valide
+        </span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Birthdate</mat-label>
+      <input matInput [matDatepicker]="dp" id="birthDate" type="date" formControlName="birthDate">
+      <mat-hint>JJ-MM-YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
+        <mat-datepicker #dp></mat-datepicker>
+    </mat-form-field>
+    <div class="btn-list">
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="!stagiaireForm.valid"
+        class="btn add-btn"
+      >
+        {{ addMode ? 'Add 💚' : 'Update 💚'}}
+      </button>
+      <button type="button" mat-raised-button color="warn" (click)="goBack()" class="btn">
+        Cancel 💀
+      </button>
+    </div>
+</form>
+
+<app-stagiaire-poe-form [stagiaire]="stagiaireTo" *ngIf="stagiaireTo"></app-stagiaire-poe-form>
+
+</ng-container>

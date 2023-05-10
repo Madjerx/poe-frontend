@@ -1,0 +1,67 @@
+
+
+
+  <mat-toolbar color="primary" class="nav">
+    <button mat-mini-fab color="accent" [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item [routerLink]="['/', 'home']">
+        Liste des stagiaires
+      </button>
+      <button mat-menu-item [routerLink]="['/', 'poes']">
+        Liste des POE
+      </button>
+      <button mat-menu-item [routerLink]="['/', 'surveys']">
+        Liste des questionnaires
+      </button>
+      <button mat-menu-item [routerLink]="['/', 'questions']">
+        Liste des questions
+      </button>
+      <button mat-menu-item [routerLink]="['/', 'answers']">
+        Liste des réponses
+      </button>
+      <button mat-menu-item [routerLink]="['/', 'googlepage']">
+        Créer des Google forms
+      </button>
+    </mat-menu>
+    <span class="example-spacer"></span>
+    <span>
+      <h1 (click)="toggleTitle()">
+        {{ title }}
+      </h1>
+    </span>
+    <span class="example-spacer"></span>
+    <button mat-mini-fab color="accent" (click)="onLogout()" *ngIf="!hasUser">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <button mat-mini-fab color="accent" (click)="onLogout()" *ngIf="hasUser">
+      <mat-icon>no_accounts</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <!-- router outlet -->
+  <router-outlet></router-outlet>
+
+  <!-- <div [ngClass]="{'overlay': true, 'visible': isOverlayVisible}">
+    <h1>Pouet</h1>
+  </div>
+  <button class="pouet-btn" type="button" (click)="makePouet()">
+    Bouton qui fait POUET
+  </button>
+
+  <div>
+    <input
+      [type]="inputType"
+      placeholder="Your password">
+    <button
+      class="password-btn"
+      type="button"
+      (click)="onShowPassword()"
+      [disabled]="this.inputType === 'text'"
+    >
+      👾💚💫
+    </button>
+
+  </div> -->
+
